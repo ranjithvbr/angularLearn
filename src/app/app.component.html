@@ -1,21 +1,21 @@
-<!-- <app-test></app-test> -->
 <div class="container">
   <h3>ToDo</h3>
   <div class="formDiv">
-    <input type="text" (change)="handleChange($event)" />
-    <button (click)="addList()">Add</button>
+    <input type="text" (change)="handleChange($event)" [ngModel]="todo" />
+
+    <!-- if condition -->
+      <div *ngIf="btnChange; then addBtn; else updateBtn">
+      </div>
+      <ng-template #addBtn><button (click)="addList()">Add</button></ng-template>
+      <ng-template #updateBtn><button (click)="updateList()">Update</button></ng-template>
+      <!--  -->
+
   </div>
   <div *ngFor="let data of todoList; index as i" >
     <div class="listContainer">
-    <div>
-      {{data}}
-    </div>
-      <div (click)="handleEdit(i)">
-        ✎ 
-      </div>
-      <div (click)="handleDelete(i)">
-        X
-      </div>
+      <div>{{data}}</div>
+      <div (click)="handleEdit(i)">✎</div>
+      <div (click)="handleDelete(i)">x</div>
     </div>
   </div>
   
