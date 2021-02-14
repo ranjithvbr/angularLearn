@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   todo = '';
   todoList = []
+  btnChange = true
+  editId = null
 
   handleChange(e:any){
     this.todo = e.target.value
@@ -17,8 +19,13 @@ export class AppComponent {
     this.todoList.push(this.todo)
   }
 
+  handleEdit(id){
+    this.todo = this.todoList[id] 
+    this.editId = id
+    this.btnChange = false
+  }
+
   handleDelete(id){
-    console.log(id,"id")
     let todoListArr = []
     this.todoList.filter((data,index)=>{
       if(id !== index){
@@ -26,6 +33,11 @@ export class AppComponent {
       }
     })
     this.todoList = todoListArr
+  }
+
+  updateList(){
+    this.todoList[this.editId] = this.todo
+    this.btnChange = true
   }
 
 }
